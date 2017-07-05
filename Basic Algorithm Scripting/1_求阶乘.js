@@ -1,4 +1,3 @@
-```js
 // 方法1：while循环
 function factorialize(num) {
   var result = 1;
@@ -16,4 +15,3 @@ function factorialize(num) {
   }
   return num*arguments.callee(num - 1);
 }
-```

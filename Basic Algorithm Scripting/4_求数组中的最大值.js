@@ -1,4 +1,3 @@
-```js
 // 方法1：reduce()
 
 function largestNum(arr) {
@@ -22,4 +21,3 @@ function largestNum2(arr) {
 function largestNum3(arr) {
 	return Math.max.apply(null, arr)
 }
-```

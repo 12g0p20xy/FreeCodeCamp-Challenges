@@ -1,4 +1,3 @@
-```js
 /*
 说明：给 whatIsInAName() 
 传入2个参数，一个对象集合和一个对象：
@@ -32,6 +31,3 @@ function whatIsInAName(collection, source) {
 whatIsInAName([{ "a": 1, "b": 2 }, { "a": 1 }, { "a": 1, "b": 2, "c": 2 }], { "a": 1, "c": 2 });
 
 // [{ "a": 1, "b": 2, "c": 2 }]
-
-
-```

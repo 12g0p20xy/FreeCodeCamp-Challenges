@@ -1,4 +1,3 @@
-```js
 // 通常方法传递 this
 
 var Person = {
@@ -47,4 +46,3 @@ var Person2 = {
 }
 
 Person2.render()
-```

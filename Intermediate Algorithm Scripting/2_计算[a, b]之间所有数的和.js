@@ -1,4 +1,3 @@
-```js
 // Basic Code Solution
 // 思路：找出最大和最小值然后循环
 
@@ -41,4 +40,3 @@ function sumAll3(arr) {
 }
 
 sumAll3([1, 4]);
-```

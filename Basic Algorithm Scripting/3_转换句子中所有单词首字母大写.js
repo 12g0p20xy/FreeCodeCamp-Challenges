@@ -1,4 +1,3 @@
-```js
 function titleCase(str) {
   var words = str.toLowerCase().split(' ');
   for(var i=0; i<words.length; i++) {
@@ -8,4 +7,3 @@ function titleCase(str) {
 }
 
 titleCase("sHoRt AnD sToUt"); // 'Short And Stout'
-```

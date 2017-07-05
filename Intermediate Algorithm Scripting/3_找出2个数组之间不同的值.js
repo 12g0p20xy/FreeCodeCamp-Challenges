@@ -1,4 +1,3 @@
-```js
 // Basic Code Solution
 // 思路：使用 indexOf() 来判断是否存在
 
@@ -32,4 +31,3 @@ function diffArray(arr1, arr2) {
 }
 
 diffArray([1, 2, 3, 5], [1, 2, 3, 4, 5]);
-```

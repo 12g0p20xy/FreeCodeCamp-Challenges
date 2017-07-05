@@ -1,4 +1,3 @@
-```js
 // 用 after 替换掉字符串中 before 的文字并且判断首字母是否大写
 
 function myReplace(str, before, after) {
@@ -18,4 +17,3 @@ function myReplace(str, before, after) {
 myReplace("He is Sleeping on the couch", "Sleeping", "sitting");
 
 // "He is Sitting on the couch"
-```
