@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>维基条目搜索器</title>
+	<base target="_blank">
+	<link href="https://cdn.bootcss.com/bootstrap-material-design/4.0.2/bootstrap-material-design.min.css" rel="stylesheet">
+	<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://cdn.bootcss.com/vue/2.4.1/vue.min.js"></script>
+	<style>
+	body{background: #eee; color: #333; padding-top: 100px; padding-bottom: 60px;}
+	.searchbar, .items{width: 650px; margin: 0 auto; margin-top: 30px; padding: 30px; border-radius: 4px; box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.05); background: #fff}
+	h2{margin: .5em 0 .8em 0;}
+	h3{margin-bottom: .5em;}
+	p{color: #888; font-weight: 300; margin-bottom: 0;}
+	.searchmatch{color: #20bd39; font-weight: 400;}
+	input, .btn{margin-bottom: 1em;}
+	.form-control{display: inline-block;}
+	</style>
+</head>
+<body>
+	<div id="app">
+		<div class="searchbar">
+			<h2>维基条目搜索器</h2>
+			<div>
+				<input v-model="key" class="form-control col-sm-6" type="text" placeholder="搜索关键词...">
+				<button @click="searchPage" class="btn btn-raised btn-success">搜索</button>
+				<button @click="test" class="btn btn-info">测试url</button>
+				<br>
+				<input v-model="range" class="form-control col-sm-2" type="range" min="5" max="20" step="5">
+				<label for="">显示条目数：{{ range }}</label>
+			</div>
+		</div>
+		<div class="result">
+			<div v-for="result in results" class="items">
+				<a :href="result.link">
+					<h3>{{ result.title }}</h3>
+					<p v-html="result.snippet"></p>
+				</a>
+			</div>
+		</div>
+	</div>
+	<script>
+		new Vue({
+			el: '#app',
+			data: {
+				key: '',
+				results: [],
+				range: 5
+			},
+			methods: {
+				randomPage: function() {
+					window.open("https://en.wikipedia.org/wiki/Special:Random")
+				},
+				test: function() {
+					console.log('https://en.wikipedia.org/w/api.php?callback=jQuery32103116390538199132_1500427547301&action=query&list=search&srsearch=star%20wars&format=json&_=1500427547302')
+				},
+				searchPage: function() {
+					this.results = []
+					var results = this.results,
+						range = this.range
+					$.ajax({
+						url: 'https://en.wikipedia.org/w/api.php',
+  						data: { action: 'query', list: 'search', srsearch: this.key, format: 'json' },
+  						// 这里要设置成 jsonp 解决跨域
+						dataType: 'jsonp',
+						success: function(x) {
+
+							// 在控制台查看返回的 x.query.search[0]
+							console.log(x.query.search[0])
+
+							for (var i = 0; i < range; i++) {
+								if (x.query.search[i]) {
+									results.push({
+										title: x.query.search[i].title,
+										snippet: x.query.search[i].snippet,
+										link: 'https://en.wikipedia.org/wiki/' + x.query.search[i].title.split(' ').join('_')
+									})
+								}
+							}
+							
+						}
+					})
+				}
+			}
+		})
+	</script>
+</body>
+</html>

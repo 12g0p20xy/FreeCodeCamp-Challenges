@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+	<title>获取天气</title>
+	<style>
+		html, body{margin: 0;padding: 0;}
+		p{color: #666;}
+		#weather-wrap{width: 150px;padding: 30px;border: 1px solid #ddd;margin: 0 auto;margin-top: 60px;box-shadow: 0 10px 26px rgba(0,0,0,.15);border-radius: 4px;}
+		#temp-btn{color: #1e41f1;cursor: pointer;margin-left: .5em;}
+		img{;margin: 0 auto;}
+	</style>
+</head>
+<body>
+	<div id="weather-wrap"></div>
+	<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+	<script>
+
+	(function($) {
+
+		var $wrap = $('#weather-wrap'),
+				wData = ''; // 获取 ajax 传递出来的 data
+
+		// 获取地理信息
+
+		if(!navigator.geolocation) {
+			alert("您的浏览器不支持地理位置");
+		}
+
+		function success(position) {
+			// 定位，获取经纬度
+    	var location = {
+    		lat: parseInt(position.coords.latitude),
+    		lon: parseInt(position.coords.longitude)
+    	};
+    	// 使用 $.param() 转换 location 对象为 URL 查询参数
+			var wStr = $.param(location);
+
+			console.log('获取的当前位置：'+ location.lat + ', ' + location.lon);
+
+			// 获取天气数据
+			$.ajax({
+				url: 'https://fcc-weather-api.glitch.me/api/current?' + wStr,
+				type: 'GET',
+				// 设置为 false 可以让 data 传递到 ajax 函数之外用于调用
+				async: false
+			})
+			.done(function(data) {
+				// 传递 data
+				wData = data;
+				$wrap.html(
+					'<img src="' + data.weather[0].icon + '">'
+					+ '<p>天气：' + data.weather[0].main + '</p>'
+					+ '<p>地理位置：' + location.lat + ', ' + location.lon + '</p>'
+					+ '<p>温度：<span id="temp">' + data.main.temp + '</span>'
+					+ '<span id="temp-btn"><sup>o</sup>C</span></p>'
+				);
+
+		    // 切换摄氏/华氏度
+				$('#temp-btn').on('click', function() {
+					var celsius = wData.main.temp,
+							fahrenheit = celsius * 1.8 + 32;
+					var $temp = $('#temp');
+					if($temp.text() == celsius) {
+						$temp.text(fahrenheit);
+						$(this).html('<sup>o</sup>F');
+					}
+					else {
+						$temp.text(celsius);
+						$(this).html('<sup>o</sup>C');
+					}
+				});
+			})
+			.fail(function() {
+				console.log("error");
+			});
+		}
+
+		function error() {
+			alert("无法获取您的位置");
+		}
+
+    navigator.geolocation.getCurrentPosition(success, error);
+
+	})(jQuery);
+		
+	</script>
+</body>
+</html>

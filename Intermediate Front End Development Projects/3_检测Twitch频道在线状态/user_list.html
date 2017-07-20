@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>检测频道在线状态</title>
+	<base target="_blank">
+	<link href="https://cdn.bootcss.com/bootstrap-material-design/4.0.2/bootstrap-material-design.min.css" rel="stylesheet">
+	<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://unpkg.com/vue@2.3.4/dist/vue.js"></script>
+	<style>
+		body{background: #eee;}
+		.avatar img{width: 50px; height: 50px; border-radius: 50%}
+		.user-list{margin-top: 60px;}
+		.user-list li{display: inline-block; vertical-align: top; padding: 30px; border: 1px solid #583EF5; background: #fff; margin: 10px; border-radius: 4px;}
+		.preview{margin-bottom: 15px;}
+		.preview img{display: block; width: 250px;}
+		.avatar{float: left;}
+		.breif{overflow: hidden; padding-left: 1em;}
+		.user-name{display: block; font-size: 18px;}
+		.breif .status{font-size: 16px; font-weight: thin;}
+		.offline{color: #999;}
+		.tab{position: fixed; top: 0; left: 0; right: 0; padding: 5px; background: #252526}
+	</style>
+</head>
+<body>
+	<div id="app">
+		<div class="tab">
+			<span @click="showAll" class="btn btn-info">全部频道</span>
+			<span @click="showOn" class="btn btn-success">当前在线</span>
+		</div>
+		<ul class="user-list">
+			<li v-for="user in users" v-show="user.visibility"><a :href="user.url">
+				<div class="preview"><img :src="user.preview"></div>
+				<div class="avatar">
+					<img :src="user.logo">
+				</div>
+				<div class="breif">
+					<span class="user-name">{{ user.name }}</span>
+					<span class="status">
+						<small v-if="user.status">
+							正在播放: {{ user.game }}
+							<br>
+							观看人数：{{ user.viewers }}
+						</small>
+						<small class="offline" v-else>离线</small>
+					</span>
+				</div>
+			</a></li>
+		</ul>
+	</div>
+	<script>
+
+		var vm = new Vue({
+			el: '#app',
+			data: {
+				users: [
+					{ name: 'freecodecamp', logo: 'https://static-cdn.jtvnw.net/jtv_user_pictures/freecodecamp-profile_image-d9514f2df0962329-300x300.png', preview: '', status: false, visibility: true },
+					{ name: 'lacari', logo: 'https://static-cdn.jtvnw.net/jtv_user_pictures/lacari-profile_image-decef76ca583dfaa-300x300.png', preview: '', status: false, visibility: true },
+					{ name: 'thespeedgamers', logo: 'https://static-cdn.jtvnw.net/jtv_user_pictures/thespeedgamers-profile_image-6152062133cdaba2-300x300.png', preview: '', status: false, visibility: true },
+					{ name: 'TeamSp00ky', logo: 'https://static-cdn.jtvnw.net/jtv_user_pictures/teamsp00ky-profile_image-8e878005b8885045-300x300.png', preview: '', status: false, visibility: true }
+				]
+			},
+			methods: {	
+				showOn() {
+					this.users.forEach(function(n) {
+						 n.visibility = n.status
+					})
+				},
+				showAll() {
+					this.users.forEach(function(n) {
+						n.visibility = true
+					})
+				}
+			}
+		});
+
+		(function($) {
+
+			// 循环获取 JSON 数据
+			vm.users.forEach(function(channelTemp) {
+				
+				$.getJSON('https://wind-bow.gomix.me/twitch-api/streams/' + channelTemp.name + '?callback=?', function(data) {
+						console.log(data);
+						// 检测是否正在直播，非直播状态 stream 属性值是 null
+						if (data.stream) {
+							channelTemp.url = data.stream.channel.url;
+							channelTemp.logo = data.stream.channel.logo;
+							channelTemp.game = data.stream.game;
+							channelTemp.preview = data.stream.preview.medium;
+							channelTemp.viewers = data.stream.viewers;
+							channelTemp.status = true;
+						}
+						else {
+							channelTemp.status = false;
+							channelTemp.preview = 'http://olrr17ktb.bkt.clouddn.com/17-7-20/37938956.jpg'
+						}
+				});
+
+			});
+
+		})(jQuery);
+
+	</script>
+</body>
+</html>
