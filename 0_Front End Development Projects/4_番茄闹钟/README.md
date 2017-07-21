@@ -1,6 +1,6 @@
 ## 介绍
 
-一个用 Vue 写的[番茄时钟](https://zh.wikipedia.org/wiki/%E7%95%AA%E8%8C%84%E5%B7%A5%E4%BD%9C%E6%B3%95)。
+一个用 Vue 写的[番茄时钟](https://zh.wikipedia.org/wiki/%E7%95%AA%E8%8C%84%E5%B7%A5%E4%BD%9C%E6%B3%95):tomato:
 
 [Demo](https://codepen.io/monad/pen/JJgxoO?editors=0010#0)
 
