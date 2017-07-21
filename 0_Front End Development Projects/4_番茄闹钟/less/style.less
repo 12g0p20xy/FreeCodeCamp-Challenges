@@ -1,0 +1,56 @@
+@import "mixin";
+
+body{
+	background: #eee;
+	text-align: center;
+}
+
+@work-theme: #4D23D1;
+@break-theme: #3ABA29;
+
+.clock{
+	.inline-block;
+	padding: 60px;
+	.break, .work{
+		.inline-block;
+		padding: 5px;
+	}
+	.counter{
+		position: relative;
+		text-align: center;
+		border: 2px @break-theme solid;
+		width: 260px;
+		height: 0;
+		padding-bottom: 260px;
+		border-radius: 50%;
+		cursor: pointer;
+		&.work{
+			border-color: @work-theme;
+			.num h3{
+				color: @work-theme;
+			}
+		}
+		.num{
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			-webkit-transform: translate(-50%, -50%);
+			-ms-transform: translate(-50%, -50%);
+			-o-transform: translate(-50%, -50%);
+			transform: translate(-50%, -50%);
+			h3{
+				color: @break-theme;
+				font-size: 36px;
+				margin-bottom: .5em;
+			}
+		}
+	}
+	.set-time{
+		margin-top: 15px;
+		font-size: 24px;
+		small{
+			display: block;
+			font-size: 14px;
+		}
+	}
+}

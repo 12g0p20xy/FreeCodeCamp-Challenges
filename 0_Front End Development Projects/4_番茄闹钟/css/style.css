@@ -1,0 +1,61 @@
+/*!
+ * Copyright 2017 by monad
+ */
+@charset "utf-8";
+body {
+  background: #eee;
+  text-align: center;
+}
+.clock {
+  display: inline-block;
+  *display: inline;
+  zoom: 1;
+  vertical-align: top;
+  padding: 60px;
+}
+.clock .break,
+.clock .work {
+  display: inline-block;
+  *display: inline;
+  zoom: 1;
+  vertical-align: top;
+  padding: 5px;
+}
+.clock .counter {
+  position: relative;
+  text-align: center;
+  border: 2px #3ABA29 solid;
+  width: 260px;
+  height: 0;
+  padding-bottom: 260px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.clock .counter.work {
+  border-color: #4D23D1;
+}
+.clock .counter.work .num h3 {
+  color: #4D23D1;
+}
+.clock .counter .num {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+.clock .counter .num h3 {
+  color: #3ABA29;
+  font-size: 36px;
+  margin-bottom: .5em;
+}
+.clock .set-time {
+  margin-top: 15px;
+  font-size: 24px;
+}
+.clock .set-time small {
+  display: block;
+  font-size: 14px;
+}
