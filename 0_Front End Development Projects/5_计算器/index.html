@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>计算器</title>
+	<link href="https://cdn.bootcss.com/bootstrap-material-design/4.0.2/bootstrap-material-design.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="style.css">
+	<script src="https://unpkg.com/vue@2.3.4/dist/vue.js"></script>
+</head>
+<body>
+	
+	<div id="app" class="wrap">
+		<div class="screen">
+			<h3 v-if="answer">{{ result }}</h3>
+			<h3 v-else>{{ current }}</h3>
+			<small>{{ equation }}</small>
+		</div>
+		<div class="pad">
+			<div>
+				<button @click="allClear" class="btn">AC</button>
+				<button @click="clearEntry" class="btn">CE</button>
+				<button @click="operator('/')" class="btn">&#247;</button>
+				<button @click="operator('*')" class="btn">&#215;</button>
+			</div>
+			<div>
+				<button @click="updateNum('7')" class="btn">7</button>
+				<button @click="updateNum('8')" class="btn">8</button>
+				<button @click="updateNum('9')" class="btn">9</button>
+				<button @click="operator('-')" class="btn">-</button>
+			</div>
+			<div>
+				<button @click="updateNum('4')" class="btn">4</button>
+				<button @click="updateNum('5')" class="btn">5</button>
+				<button @click="updateNum('6')" class="btn">6</button>
+				<button @click="operator('+')" class="btn">+</button>
+			</div>
+			<div>
+				<button @click="updateNum('1')" class="btn">1</button>
+				<button @click="updateNum('2')" class="btn">2</button>
+				<button @click="updateNum('3')" class="btn">3</button>
+			</div>
+			<div>
+				<button @click="updateNum('0')" class="btn zero-btn">0</button>
+				<button @click="updateNum('.')" class="btn">.</button>
+				<button @click="getResult" class="btn equal-btn">=</button>
+			</div>
+		</div>
+
+		<hr>
+
+		<div class="test">
+			<h4>测试数据</h4>
+			<small>结果: {{ result }}</small><br>
+			<small>当前: {{ current }}</small><br>
+			<small>算式: {{ equation }}</small><br>
+			<small>是否执行过等于: {{ answer }}</small><br>
+		</div>
+		
+
+	</div>
+
+	<script src="app.js"></script>
+	
+</body>
+</html>

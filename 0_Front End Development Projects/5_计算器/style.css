@@ -1,0 +1,33 @@
+.wrap{
+	width: 290px;
+	padding: 15px;
+}
+.screen{
+	width: 252px;
+	background: #ddd;
+	padding: .5em;
+	border: 1px solid;
+}
+.pad{
+	position: relative;
+	margin-top: .5em;
+}
+.pad button{
+	font-size: 20px;
+	border: 1px solid;
+	width: 3em;
+	height: 2.8em;
+	text-align: center;
+}
+.pad button.equal-btn{
+	position: absolute;
+	top: 9.15em;
+	left: 9.6em;
+	height: 5.85em;
+}
+.pad button.zero-btn{
+	width: 6.18em;
+}
+hr{
+	margin: 30px 0;
+}
