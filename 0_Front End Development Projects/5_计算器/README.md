@@ -2,7 +2,7 @@
 
 计算器
 
-[Demo](https://codepen.io/monad/pen/WENVod)
+[Demo](https://codepen.io/monad/pen/WENVod?editors=1010#0)
 
 ## 功能
 
